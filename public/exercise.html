@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Fitness Tracker</title>
+</head>
+
+<body>
+    <nav>
+        <a href="/">Firness Tracker</a>
+        <a href="/stats">Dashboard</a>
+    </nav>
+    <div class="wrapper">
+        <header>
+            <h1>Fitness Tracker</h1>
+        </header>
+        <div class="ui container exercise">
+            <div class="ui raised card m-auto">
+                <h2>Add Your Exercise</h2>
+                <form action="POST">
+                    <div class="workout-type">
+                        <label for="type">Exercise Type:</label>
+                        <select name="type" id="type">
+                            <option disable selected>Select Exercise Type</option>
+                            <option value="resistance">Resistance</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
