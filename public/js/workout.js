@@ -71,3 +71,15 @@ function renderWorkoutSummary(summary) {
         container.appendChild(p);
     });
 }
+
+function renderNoWorkoutText() {
+    const container = document.querySelector(".workout-stats");
+    const p = document.createElement("p");
+    const strong = document.createElement("strong");
+    strong.textContent = "You have no created a workout"
+
+    p.appendChild(strong);
+    container.appendChild(p);
+}
+
+initWorkout();
