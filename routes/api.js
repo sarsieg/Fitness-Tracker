@@ -37,3 +37,17 @@ router.post("/api/workouts", ({ body }, res) => {
         res.json(err);
     });
 });
+
+// get the workouts within range
+router.get("/api/workouts/range", (req, res) => {
+    db.Workout.find({}).then(dbWorkout => {
+        console.log("ALL WORKOUTS");
+        console.log(dbWorkout);
+
+        res.json(dbWorkout);
+    }).catch(err => {
+        res.json(err);
+    });
+});
+
+module.exports = router;
