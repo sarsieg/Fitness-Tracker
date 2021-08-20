@@ -1,7 +1,5 @@
 // get all workout data from back-end
 
-const { populate } = require("../../models/Workout");
-
 fetch("/api/workouts/range")
     .then(response => {
         return response.json();
@@ -39,7 +37,7 @@ function populateChart(data) {
     let durations = duration(data);
     let pounds = calculateTotalWeight(data);
     let workouts = workoutNames(data);
-    const colors - generatePalette();
+    const colors = generatePalette();
 
     let line = document.querySelector("#canvas").getContext("2d");
     let bar = document.querySelector("#canvas2").getContext("2d");
@@ -113,7 +111,91 @@ function populateChart(data) {
                     "rgba(153, 102, 255, 1)",
                     "rgba(255, 159, 64, 1)",
                 ],
+                borderWidth: 1
             }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Pounds Lifted"
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-    })
+    });
+
+    let pieChart = new Chart(pie, {
+        type: "pie",
+        data: {
+            labels: workouts,
+            datasets: [{
+                label: "Exercises Performed",
+                backgroundColor: colors,
+                data: durations
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Exercises Performed"
+            }
+        }
+    });
+
+    let donutChart = new Chart(pie2, {
+        type: "doughnut",
+        data: {
+            labels: workouts,
+            datasets: [{
+                label: "Exercises Performed",
+                backgroundColor: colors,
+                data: pounds
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Exercises Performed"
+            }
+        }
+    });
+
+    function duration(data) {
+        let durations = [];
+
+        data.forEach(workout => {
+            workout.exercises.forEach(exercise => {
+                durations.push(exercise.duration);
+            });
+
+        });
+        return durations;
+    }
+
+    function calculateTotalWeight(data) {
+        let total = [];
+
+        data.forEach(workout => {
+            workout.exercises.forEach(exercise => {
+                total.push(exercise.weight);
+            });
+        });
+        return total;
+    }
+
+    function workoutNames(data) {
+        let workouts = [];
+
+        data.forEach(workout => {
+            workout.exercises.forEach(exercise => {
+                workouts.push(exercise.name);
+            });
+        });
+        return workouts;
+    }
 }
