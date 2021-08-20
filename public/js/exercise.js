@@ -109,3 +109,44 @@ async function handleFormSubmit(event) {
         workoutData.duration = Number(resistanceDurationInput.value.trim());
     }
 }
+
+await API.addExercise(workoutData);
+clearInputs();
+toast.classList.add("success");
+}
+
+function handleToastAnimationEnd() {
+    toast.removeAttribute("class");
+    if (shouldNavigateAway) {
+        location.href = "/";
+    }
+}
+
+function clearInputs() {
+    cardioNameInput.value = "";
+    nameInput.value = "";
+    setsInput.value = "";
+    durationInput.value = "";
+    distanceInput.value = "";
+    weightInput.value = "";
+    repsInput.value = "";
+    resistanceDurationInput.value = "";
+}
+
+if (workoutTypeSelect) {
+    workoutTypeSelect.addEventListener("change", handleWorkoutTypeChange);
+
+}
+if (completeButton) {
+    completeButton.addEventListener("click", function(event) {
+        shouldNavigateAway = true;
+        handleFormSubmit(event);
+    });
+    if (addButton) {
+        addButton.addEventListener("click", handleFormSubmit);
+    }
+    toast.addEventListener("animated", handleToastAnimationEnd);
+
+    document
+        .querySelectorAll("input")
+        .forEach(element => element.addEventListener("input", validateInputs));
