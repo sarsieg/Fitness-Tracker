@@ -25,7 +25,6 @@ function tallyExercises(exercises) {
             acc.totalWeight = (acc.totalWeight || 0) + curr.weight;
             acc.totalSets = (acc.totalSets || 0) + curr.sets;
             acc.totalReps = (acc.totalReps || 0) + curr.reps;
-
         } else if (curr.type === "cardio") {
             acc.totalDistance = (acc.totalDistance || 0) + curr.distance;
         }
@@ -76,7 +75,7 @@ function renderNoWorkoutText() {
     const container = document.querySelector(".workout-stats");
     const p = document.createElement("p");
     const strong = document.createElement("strong");
-    strong.textContent = "You have no created a workout"
+    strong.textContent = "You have not created a workout yet!"
 
     p.appendChild(strong);
     container.appendChild(p);
