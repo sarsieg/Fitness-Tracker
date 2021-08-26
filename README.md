@@ -41,8 +41,12 @@ When the user loads the page, they should be given the option to create a new wo
 * Mongodb
 
 ## License
-MIT License <img align="center" src="https://img.shields.io/github/license/fitness-tracker?style=for-the-badge" alt="MIT license"/>
-
+MIT License 
+</br>
+<p align="center">
+ <img align="center" src="https://img.shields.io/github/license/fitness-tracker?style=for-the-badge" alt="MIT license"/>
+ </p>
+ 
 Copyright (c) 2021 Sarah Siegel
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
