@@ -43,9 +43,7 @@ When the user loads the page, they should be given the option to create a new wo
 ## License
 MIT License 
 </br>
-<p align="center">
- <img align="center" src="https://img.shields.io/github/license/fitness-tracker?style=for-the-badge" alt="MIT license"/>
- </p>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
  
 Copyright (c) 2021 Sarah Siegel
 
