@@ -20,9 +20,11 @@ mongoose.connect(
     }
 );
 
-app.use(require("./routes/api.js"));
-app.use(require("./routes/html.js"));
+app.use(router);
+require("./routes/html.js")(app);
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
 });
+
+module.exports = db;
