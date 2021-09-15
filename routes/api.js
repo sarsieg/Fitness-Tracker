@@ -1,61 +1,50 @@
-const db = require("../models");
-const router = require("express").Router();
-
-db.Workout.find({}).then(function(res) {
-    console.log("Checking if db is populated");
-    if (res.length === 0) {
-        console.log("DB is empty");
-        require("./seeders/seed.js");
-    }
-});
-
-router.get("/api/workouts", (req, res) => {
-    db.Workout.find({}).then(dbWorkout => {
-        dbWorkout.forEach(workout => {
-            var total = 0;
-            workout.exercises.forEach(e => {
-                total += e.duration;
-            });
-            workout.totalDuration = total;
-        });
-        res.json(dbWorkout);
-    }).catch(err => {
-        res.json(err);
-    });
-});
-
-// Add the exercise
-router.put("/api/workouts/:id", (req, res) => {
-    db.Workout.findOneAndUpdate({ _id: req.params.id }, {
-        $inc: { totalDuration: req.body.duration },
-        $push: { exercises: req.body }
-    }, { new: true }).then(dbWorkout => {
-        res.json(dbWorkout);
-    }).catch(err => {
-        res.json(err);
-    });
-
-});
+const Workout = require("../models/workout.js");
+const router = express.Router();
+const mongoose = require("mongoose");
+const express = require("express");
 
 // creates workout 
 router.post("/api/workouts", ({ body }, res) => {
-    db.Workout.create(body).then((dbWorkout => {
-        res.json(dbWorkout);
-    })).catch(err => {
-        res.json(err);
-    });
-});
+            Workout.create({})
+                .then((dbWorkout => {
+                        res.json(dbWorkout);
+                    })
+                    .catch(({ message }) => {
+                        console.log(message);
+                    });
+                });
 
-// get the workouts within range
-router.get("/api/workouts/range", (req, res) => {
-    db.Workout.find({}).then(dbWorkout => {
-        console.log("ALL WORKOUTS");
-        console.log(dbWorkout);
+        router.put("/api/workouts/:id", ({ params, body }, res) => {
+            console.log("PARAMS", body, params);
 
-        res.json(dbWorkout);
-    }).catch(err => {
-        res.json(err);
-    });
-});
+            Workout.findByIdAndUpdate({ _id: params.id }, { $push: { exercises: body } }, { new: true })
+                .then((dbWorkout) => {
+                    res.json(dbWorkout);
+                })
+                .catch((err) => {
+                    res.json(err);
+                });
+        });
 
-module.exports = router;
+        // gets the workouts within range
+        router.get("/api/workouts/range", (req, res) => {
+            Workout.find({})
+                .limit(7)
+                .then((dbWorkout) => {
+                    res.json(dbWorkout);
+                }).catch(err => {
+                    res.json(err);
+                });
+        });
+
+        router.get("/api/workouts", (req, res) => {
+            Workout.find({})
+                .then((dbWorkout) => {
+                    res.json(dbWorkout);
+                })
+                .catch((err) => {
+                    res.json(err);
+                });
+        });
+
+        module.exports = router;
